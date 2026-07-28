@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Womafreesm — стратегічне бачення СЕО</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF5EC;
+    --cream-2:#F3E9DC;
+    --plum-950:#28121F;
+    --plum-900:#3B1B36;
+    --plum-800:#54294D;
+    --plum-700:#6E3763;
+    --rose:#A8637C;
+    --rose-soft:#D9A9AE;
+    --gold:#C7963F;
+    --gold-soft:#E8CE9A;
+    --ink:#2A1B26;
+    --ink-soft:#6B5A63;
+    --line:#E4D6C6;
+    --green:#5C7A5A;
+    --green-bg:#EAF0E6;
+    --red:#A6443A;
+    --red-bg:#F5E6E0;
+    --blue:#3F6A82;
+    --blue-bg:#E6EDF0;
+    --orange:#B3762E;
+    --orange-bg:#F5EADA;
+    --radius:18px;
+    --shadow: 0 20px 50px -25px rgba(40,18,31,0.35);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,h4,.serif{
+    font-family:'Playfair Display', serif;
+    color:var(--plum-950);
+    margin:0;
+  }
+
+  a{color:inherit;}
+  :focus-visible{outline:3px solid var(--gold); outline-offset:3px; border-radius:4px;}
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:12.5px;
+    font-weight:700;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--rose);
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:1.5px;
+    background:var(--rose);
+    display:inline-block;
+  }
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  section{
+    padding:110px 0;
+    position:relative;
+  }
+  section + section{ border-top:1px solid var(--line); }
+
+  /* ---------- NAV DOTS ---------- */
+  .dotnav{
+    position:fixed;
+    right:26px;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:50;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .dotnav a{
+    width:10px; height:10px;
+    border-radius:50%;
+    background:var(--plum-900);
+    opacity:0.25;
+    display:block;
+    transition:opacity .25s, transform .25s;
+  }
+  .dotnav a:hover, .dotnav a:focus-visible{ opacity:0.9; transform:scale(1.3); }
+  @media (max-width:900px){ .dotnav{display:none;} }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding:140px 0 90px;
+    background:
+      radial-gradient(circle at 82% 18%, rgba(199,150,63,0.16), transparent 42%),
+      radial-gradient(circle at 15% 85%, rgba(168,99,124,0.18), transparent 45%),
+      var(--cream);
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:50px;
+    align-items:center;
+  }
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} .hero{padding-top:110px;} }
+
+  .hero h1{
+    font-size:clamp(38px, 5.4vw, 64px);
+    line-height:1.05;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--rose);
+  }
+  .hero p.lede{
+    margin-top:22px;
+    max-width:54ch;
+    font-size:18.5px;
+    color:var(--ink-soft);
+  }
+  .hero-tags{
+    margin-top:34px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .tag{
+    padding:8px 16px;
+    border-radius:999px;
+    background:#fff;
+    border:1px solid var(--line);
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--plum-800);
+  }
+
+  .dandelion-wrap{ position:relative; display:flex; justify-content:center; }
+  .dandelion-wrap svg{ width:100%; max-width:420px; height:auto; }
+  .seed{ transform-origin:210px 210px; }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .sec-head{
+    max-width:740px;
+    margin-bottom:56px;
+  }
+  .sec-head h2{
+    font-size:clamp(28px,3.4vw,42px);
+    font-weight:600;
+    margin-top:14px;
+    line-height:1.15;
+  }
+  .sec-head p{
+    margin-top:16px;
+    color:var(--ink-soft);
+    font-size:17px;
+    max-width:62ch;
+  }
+
+  .icon-circle{
+    width:52px; height:52px;
+    border-radius:50%;
+    background:var(--plum-900);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+  .icon-circle svg{ width:26px; height:26px; stroke:var(--cream); }
+  .icon-circle.rose{ background:var(--rose); }
+  .icon-circle.gold{ background:var(--gold); }
+
+  /* ---------- FORMULA FLOW ---------- */
+  .formula{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:10px;
+    margin-top:8px;
+  }
+  .formula .node{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:16px 20px;
+    font-weight:600;
+    font-size:15px;
+    color:var(--plum-900);
+    box-shadow:var(--shadow);
+  }
+  .formula .arrow{ color:var(--rose); font-size:20px; }
+
+  /* ---------- DIRECTION CARDS (7) ---------- */
+  .directions{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:22px;
+  }
+  .dcard{
+    background:#fff;
+    border-radius:var(--radius);
+    padding:28px 24px;
+    box-shadow:var(--shadow);
+    border-top:5px solid var(--plum-900);
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .dcard:nth-child(2){ border-top-color:var(--rose); }
+  .dcard:nth-child(3){ border-top-color:var(--gold); }
+  .dcard:nth-child(4){ border-top-color:var(--plum-700); }
+  .dcard:nth-child(5){ border-top-color:var(--blue); }
+  .dcard:nth-child(6){ border-top-color:var(--orange); }
+  .dcard:nth-child(7){ border-top-color:var(--rose-soft); }
+  .dcard .num{ font-family:'Playfair Display',serif; font-style:italic; color:var(--rose); font-size:15px;}
+  .dcard h3{ font-size:19px; font-weight:600; }
+  .dcard p{ font-size:14.5px; color:var(--ink-soft); margin:0;}
+  .dcard ul{ margin:6px 0 0; padding-left:18px; font-size:13.5px; color:var(--ink-soft);}
+  .dcard li{ margin-bottom:5px;}
+
+  /* ---------- HUB DIAGRAM ---------- */
+  .hub{ display:flex; justify-content:center; margin:20px 0 60px; }
+  .hub svg{ width:100%; max-width:680px; height:auto; }
+
+  /* ---------- STATUS PANELS ---------- */
+  .status-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  @media (max-width:800px){ .status-grid{grid-template-columns:1fr;} }
+  .photo-panel{
+    border-radius:var(--radius);
+    overflow:hidden;
+    position:relative;
+    min-height:220px;
+    display:flex;
+    align-items:flex-end;
+    box-shadow:var(--shadow);
+  }
+  .photo-panel .caption{ position:relative; z-index:2; padding:22px; color:#fff; }
+  .photo-panel .caption .eyebrow{ color:var(--gold-soft); }
+  .photo-panel .caption .eyebrow::before{ background:var(--gold-soft); }
+  .photo-panel .caption h4{ font-family:'Playfair Display',serif; font-size:20px; font-weight:600; margin:6px 0 0; color:#fff;}
+  .photo-panel svg.illustration{ position:absolute; inset:0; width:100%; height:100%; }
+
+  /* ---------- READY BOX ---------- */
+  .ready-box{
+    background:linear-gradient(135deg, var(--plum-900), var(--plum-800));
+    border-radius:22px;
+    padding:44px;
+    color:var(--cream);
+    box-shadow:var(--shadow);
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:34px;
+  }
+  @media (max-width:800px){ .ready-box{grid-template-columns:1fr; padding:30px;} }
+  .ready-box h3{ color:#fff; font-size:24px; font-weight:600;}
+  .ready-box p{ color:rgba(251,245,236,0.78); font-size:15px; }
+  .check-list{ list-style:none; margin:20px 0 0; padding:0; display:flex; flex-direction:column; gap:12px;}
+  .check-list li{ display:flex; gap:12px; align-items:flex-start; font-size:14.5px; color:rgba(251,245,236,0.92);}
+  .check-list svg{ flex-shrink:0; width:20px; height:20px; margin-top:1px; stroke:var(--gold-soft);}
+
+  /* ---------- SWOT ---------- */
+  .swot-grid{ display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+  @media (max-width:760px){ .swot-grid{grid-template-columns:1fr;} }
+  .swot-card{ border-radius:var(--radius); padding:28px; box-shadow:var(--shadow); }
+  .swot-card h3{ display:flex; align-items:center; gap:10px; font-size:19px; font-weight:600; margin-bottom:14px; }
+  .swot-card ul{ margin:0; padding-left:18px; font-size:14.5px; }
+  .swot-card li{ margin-bottom:9px; }
+  .swot-s{ background:var(--green-bg); } .swot-s h3{ color:var(--green); }
+  .swot-w{ background:var(--red-bg); } .swot-w h3{ color:var(--red); }
+  .swot-o{ background:var(--blue-bg); } .swot-o h3{ color:var(--blue); }
+  .swot-t{ background:var(--orange-bg); } .swot-t h3{ color:var(--orange); }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{ position:relative; display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:10px; }
+  @media (max-width:900px){ .timeline{grid-template-columns:1fr;} }
+  .timeline::before{ content:""; position:absolute; top:26px; left:0; right:0; height:2px; background:var(--line); }
+  @media (max-width:900px){ .timeline::before{display:none;} }
+  .tstep{ position:relative; padding-top:56px; }
+  .tstep .dot{
+    position:absolute; top:14px; left:0;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--rose); color:#fff; font-weight:700; font-size:12px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .tstep h4{ font-family:'Playfair Display',serif; font-size:18px; font-weight:600; color:var(--plum-950); margin-bottom:8px;}
+  .tstep p{ font-size:14px; color:var(--ink-soft); margin:0;}
+
+  /* ---------- AUTOMATION BLOCKS ---------- */
+  .auto-block + .auto-block{ margin-top:64px; }
+  .auto-block-head{ display:flex; gap:18px; align-items:center; margin-bottom:18px; }
+  .auto-block-head .label{ display:block; font-size:11.5px; text-transform:uppercase; letter-spacing:.08em; font-weight:700; color:var(--ink-soft); margin-bottom:4px;}
+  .auto-block-head h3{ font-size:21px; font-weight:600; }
+  .block-lede{ color:var(--ink-soft); font-size:15px; max-width:70ch; margin:0 0 22px; }
+
+  .table-wrap{ overflow-x:auto; background:#fff; border-radius:var(--radius); box-shadow:var(--shadow); }
+  .app-table{ width:100%; border-collapse:collapse; font-size:13.5px; min-width:640px; }
+  .app-table th{ text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft); padding:14px 16px; border-bottom:2px solid var(--line); white-space:nowrap; }
+  .app-table td{ padding:13px 16px; border-bottom:1px solid var(--line); color:var(--ink); white-space:nowrap; }
+  .app-table tr:last-child td{ border-bottom:none; }
+  .pill{ display:inline-block; padding:4px 12px; border-radius:999px; font-size:12px; font-weight:700; }
+  .pill-received{ background:#ECE7E9; color:#6B5A63; }
+  .pill-review{ background:var(--blue-bg); color:var(--blue); }
+  .pill-dd{ background:var(--orange-bg); color:var(--orange); }
+  .pill-approved{ background:var(--green-bg); color:var(--green); }
+  .pill-integration{ background:#F1E3EC; color:var(--rose); }
+  .stage-legend{ display:flex; flex-wrap:wrap; gap:10px 18px; margin-top:16px; font-size:12.5px; color:var(--ink-soft); }
+  .stage-legend span{ display:inline-flex; align-items:center; gap:6px; }
+  .stage-legend i{ width:9px; height:9px; border-radius:50%; display:inline-block; }
+
+  .consent-card{ background:#fff; border-radius:18px; box-shadow:var(--shadow); overflow:hidden; max-width:520px; }
+  .consent-head{ background:var(--plum-950); color:#fff; padding:16px 22px; font-size:13px; display:flex; justify-content:space-between; align-items:center; }
+  .consent-body{ padding:26px 22px; }
+  .consent-id{ font-size:12px; color:var(--ink-soft); margin-bottom:18px; }
+  .consent-check{ display:flex; gap:12px; align-items:flex-start; margin-bottom:16px; font-size:14px; }
+  .consent-check .box{ width:20px; height:20px; border-radius:5px; border:2px solid var(--plum-800); flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px; }
+  .consent-check .box.checked{ background:var(--plum-800); }
+  .consent-check .box svg{ width:12px; height:12px; stroke:#fff; }
+  .consent-meta{ font-size:12.5px; color:var(--ink-soft); margin:14px 0; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+  .consent-status{ display:inline-block; padding:5px 12px; border-radius:999px; background:var(--green-bg); color:var(--green); font-size:12px; font-weight:700; }
+  .consent-btn{ margin-top:18px; width:100%; padding:14px; border-radius:12px; background:var(--gold); color:var(--plum-950); border:none; font-weight:700; font-size:14.5px; }
+  .consent-log{ margin-top:22px; border-top:1px solid var(--line); padding-top:18px; }
+  .consent-log-title{ font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft); font-weight:700; margin-bottom:10px; }
+  .consent-log table{ width:100%; font-size:12px; border-collapse:collapse; }
+  .consent-log th,.consent-log td{ padding:6px 8px; text-align:left; color:var(--ink-soft); border-bottom:1px solid var(--line); }
+
+  .flow-detailed{ position:relative; display:flex; flex-direction:column; max-width:760px; }
+  .flow-step{ display:flex; gap:20px; padding-bottom:32px; position:relative; }
+  .flow-step:last-of-type{ padding-bottom:0; }
+  .flow-step::before{ content:""; position:absolute; left:23px; top:52px; bottom:0; width:2px; background:var(--line); }
+  .flow-step:last-of-type::before{ display:none; }
+  .flow-icon{ width:48px; height:48px; border-radius:50%; background:var(--plum-900); display:flex; align-items:center; justify-content:center; flex-shrink:0; z-index:1; }
+  .flow-icon svg{ width:22px; height:22px; stroke:var(--cream); }
+  .flow-content h4{ font-size:17px; font-weight:600; margin:2px 0 6px;}
+  .flow-content p{ font-size:14px; color:var(--ink-soft); margin:0; }
+  .flow-safety{ margin:12px 0 34px 68px; background:var(--red-bg); border-left:4px solid var(--red); padding:16px 20px; border-radius:10px; display:flex; gap:14px; align-items:flex-start; max-width:640px; }
+  .flow-safety svg{ width:22px; height:22px; stroke:var(--red); flex-shrink:0; }
+  .flow-safety p{ margin:0; font-size:13.5px; color:var(--red); font-weight:600; }
+
+  .budget-dash{ background:#fff; border-radius:var(--radius); box-shadow:var(--shadow); padding:34px; }
+  .budget-top{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:20px; margin-bottom:28px; padding-bottom:24px; border-bottom:1px solid var(--line); }
+  .budget-total .amount{ font-family:'Playfair Display',serif; font-size:36px; font-weight:600; color:var(--plum-950); }
+  .budget-total .label{ font-size:12.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft); }
+  .budget-total .bar-outer{ width:260px; height:10px; background:var(--cream-2); border-radius:999px; overflow:hidden; margin-top:8px; }
+  .budget-total .bar-inner{ height:100%; background:linear-gradient(90deg,var(--gold),var(--rose)); border-radius:999px; }
+  .budget-pct{ font-family:'Playfair Display',serif; font-size:28px; color:var(--rose); }
+  .budget-lines{ display:grid; grid-template-columns:1fr 1fr; gap:20px 28px; }
+  @media (max-width:700px){ .budget-lines{grid-template-columns:1fr;} }
+  .budget-line .row{ display:flex; justify-content:space-between; font-size:13.5px; margin-bottom:6px; }
+  .budget-line .row .name{ font-weight:600; color:var(--plum-900); }
+  .budget-line .row .nums{ color:var(--ink-soft); }
+  .budget-line .bar-outer{ width:100%; height:7px; background:var(--cream-2); border-radius:999px; overflow:hidden; }
+  .budget-line .bar-inner{ height:100%; background:var(--plum-700); border-radius:999px; }
+  .budget-note{ margin-top:22px; font-size:12px; color:var(--ink-soft); font-style:italic; }
+
+  /* ---------- ASKS ---------- */
+  .ask-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  @media (max-width:900px){ .ask-grid{grid-template-columns:1fr;} }
+  .ask-card{ background:#fff; border-radius:var(--radius); padding:30px 26px; box-shadow:var(--shadow); border-bottom:5px solid var(--gold); }
+  .ask-card:nth-child(2){ border-bottom-color:var(--rose); }
+  .ask-card:nth-child(3){ border-bottom-color:var(--plum-800); }
+  .ask-card h3{ font-size:20px; font-weight:600; margin:16px 0 12px;}
+  .ask-card ul{ margin:0; padding-left:18px; font-size:14.5px; color:var(--ink-soft);}
+  .ask-card li{ margin-bottom:9px;}
+
+  .cta-strip{
+    margin-top:50px; background:var(--plum-950); border-radius:22px; padding:36px 40px; color:var(--cream);
+    display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  }
+  .cta-strip p{ margin:0; font-size:15.5px; color:rgba(251,245,236,0.8); max-width:56ch;}
+  .cta-strip strong{ color:#fff; font-family:'Playfair Display',serif; font-weight:600; font-size:19px; display:block; margin-bottom:6px;}
+
+  .slide-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:10px; }
+  @media (max-width:1000px){ .slide-grid{grid-template-columns:repeat(4,1fr);} }
+  @media (max-width:600px){ .slide-grid{grid-template-columns:repeat(2,1fr);} }
+  .slide-chip{ background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px 10px; text-align:center; font-size:12.5px; font-weight:600; color:var(--plum-800); }
+  .slide-chip span{ display:block; font-family:'Playfair Display',serif; font-style:italic; color:var(--rose); font-size:16px; margin-bottom:4px;}
+
+  footer{ padding:60px 0 40px; text-align:center; color:var(--ink-soft); font-size:13.5px; }
+  footer .brand{ font-family:'Playfair Display',serif; color:var(--plum-950); font-size:17px; margin-bottom:6px; font-weight:600;}
+</style>
+</head>
+<body>
+
+<nav class="dotnav" aria-label="Навігація по розділах">
+  <a href="#hero" aria-label="Початок"></a>
+  <a href="#what" aria-label="Сім напрямків"></a>
+  <a href="#status" aria-label="Стан організації"></a>
+  <a href="#swot" aria-label="SWOT"></a>
+  <a href="#first" aria-label="Пріоритет №1"></a>
+  <a href="#plan" aria-label="План 90 днів"></a>
+  <a href="#automate" aria-label="Операційні рішення"></a>
+  <a href="#ask" aria-label="Що потрібно від команди"></a>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Womafreesm · бачення та рішення СЕО</span>
+      <h1 style="margin-top:16px;">Одна ідея.<br>Сім напрямків.<br><em>Один порядок дій.</em></h1>
+      <p class="lede">Структура організації, чіткі пріоритети та перші рішення — мій погляд на розвиток Womafreesm на посаді CEO.</p>
+      <div class="hero-tags">
+        <span class="tag">Дослідження</span>
+        <span class="tag">Захист жінок</span>
+        <span class="tag">Міжнародна координація</span>
+        <span class="tag">Духовна архітектура</span>
+        <span class="tag">Культура і медіа</span>
+      </div>
+    </div>
+    <div class="dandelion-wrap">
+      <svg viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="210" cy="210" r="200" fill="url(#g1)"/>
+        <defs>
+          <radialGradient id="g1" cx="50%" cy="50%" r="60%">
+            <stop offset="0%" stop-color="#F3E9DC"/>
+            <stop offset="100%" stop-color="#FBF5EC" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <g class="seed">
+          <circle cx="210" cy="210" r="10" fill="#3B1B36"/>
+          <g stroke="#54294D" stroke-width="2" stroke-linecap="round">
+            <line x1="210" y1="210" x2="210" y2="60"/>
+            <line x1="210" y1="210" x2="325" y2="95"/>
+            <line x1="210" y1="210" x2="360" y2="210"/>
+            <line x1="210" y1="210" x2="325" y2="325"/>
+            <line x1="210" y1="210" x2="210" y2="360"/>
+            <line x1="210" y1="210" x2="95" y2="325"/>
+            <line x1="210" y1="210" x2="60" y2="210"/>
+            <line x1="210" y1="210" x2="95" y2="95"/>
+            <line x1="210" y1="210" x2="270" y2="70"/>
+            <line x1="210" y1="210" x2="350" y2="150"/>
+            <line x1="210" y1="210" x2="350" y2="270"/>
+            <line x1="210" y1="210" x2="270" y2="350"/>
+            <line x1="210" y1="210" x2="150" y2="350"/>
+            <line x1="210" y1="210" x2="70" y2="270"/>
+            <line x1="210" y1="210" x2="70" y2="150"/>
+            <line x1="210" y1="210" x2="150" y2="70"/>
+          </g>
+          <g fill="#C7963F">
+            <circle cx="210" cy="60" r="5"/><circle cx="325" cy="95" r="5"/><circle cx="360" cy="210" r="5"/>
+            <circle cx="325" cy="325" r="5"/><circle cx="210" cy="360" r="5"/><circle cx="95" cy="325" r="5"/>
+            <circle cx="60" cy="210" r="5"/><circle cx="95" cy="95" r="5"/>
+          </g>
+          <g fill="#A8637C">
+            <circle cx="270" cy="70" r="3.5"/><circle cx="350" cy="150" r="3.5"/><circle cx="350" cy="270" r="3.5"/>
+            <circle cx="270" cy="350" r="3.5"/><circle cx="150" cy="350" r="3.5"/><circle cx="70" cy="270" r="3.5"/>
+            <circle cx="70" cy="150" r="3.5"/><circle cx="150" cy="70" r="3.5"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<!-- ================= 1. СІМ НАПРЯМКІВ ================= -->
+<section id="what">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">01 · Архітектура рішення</span>
+      <h2>Що таке Womafreesm</h2>
+      <p>Єдина логіка проходить через усю організацію: досвід жінки перетворюється на доказ, доказ — на стандарт, а стандарт змінює правила гри.</p>
+    </div>
+
+    <div class="formula" role="list" aria-label="Формула роботи організації">
+      <div class="node">Досвід жінки</div><div class="arrow">→</div>
+      <div class="node">Кейс</div><div class="arrow">→</div>
+      <div class="node">Докази / дані</div><div class="arrow">→</div>
+      <div class="node">Стандарт</div><div class="arrow">→</div>
+      <div class="node">Зміна правил</div>
+    </div>
+
+    <div class="hub" style="margin-top:60px;">
+      <svg viewBox="0 0 640 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Схема семи напрямків Womafreesm навколо єдиного центру">
+        <line x1="320" y1="260" x2="320" y2="70" stroke="#E4D6C6" stroke-width="2"/>
+        <line x1="320" y1="260" x2="469" y2="142" stroke="#E4D6C6" stroke-width="2"/>
+        <line x1="320" y1="260" x2="505" y2="302" stroke="#E4D6C6" stroke-width="2"/>
+        <line x1="320" y1="260" x2="402" y2="431" stroke="#E4D6C6" stroke-width="2"/>
+        <line x1="320" y1="260" x2="238" y2="431" stroke="#E4D6C6" stroke-width="2"/>
+        <line x1="320" y1="260" x2="135" y2="302" stroke="#E4D6C6" stroke-width="2"/>
+        <line x1="320" y1="260" x2="171" y2="142" stroke="#E4D6C6" stroke-width="2"/>
+
+        <circle cx="320" cy="260" r="56" fill="#3B1B36"/>
+        <text x="320" y="255" text-anchor="middle" fill="#FBF5EC" font-family="Playfair Display, serif" font-size="14" font-weight="600">Womafreesm</text>
+        <text x="320" y="272" text-anchor="middle" fill="#E8CE9A" font-family="Inter, sans-serif" font-size="10">єдина логіка</text>
+
+        <g font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#3B1B36" text-anchor="middle">
+          <circle cx="320" cy="70" r="46" fill="#fff" stroke="#54294D" stroke-width="2"/>
+          <text x="320" y="66">WLCE</text><text x="320" y="79">Index</text>
+
+          <circle cx="469" cy="142" r="46" fill="#fff" stroke="#A8637C" stroke-width="2"/>
+          <text x="469" y="138">Аудит</text><text x="469" y="151">45–64</text>
+
+          <circle cx="505" cy="302" r="46" fill="#fff" stroke="#C7963F" stroke-width="2"/>
+          <text x="505" y="298">Захист</text><text x="505" y="311">жінок</text>
+
+          <circle cx="402" cy="431" r="46" fill="#fff" stroke="#6E3763" stroke-width="2"/>
+          <text x="402" y="427">Асамблея</text><text x="402" y="440">(мережа)</text>
+
+          <circle cx="238" cy="431" r="46" fill="#fff" stroke="#3F6A82" stroke-width="2"/>
+          <text x="238" y="427">Духовна</text><text x="238" y="440">коаліція</text>
+
+          <circle cx="135" cy="302" r="46" fill="#fff" stroke="#B3762E" stroke-width="2"/>
+          <text x="135" y="298">Культура</text><text x="135" y="311">і медіа</text>
+
+          <circle cx="171" cy="142" r="46" fill="#fff" stroke="#8B5E83" stroke-width="2"/>
+          <text x="171" y="138">Reading</text><text x="171" y="151">Order</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="directions">
+      <div class="dcard">
+        <div class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="20" y1="20" x2="15.5" y2="15.5"/></svg></div>
+        <span class="num">01</span>
+        <h3>Women's Life-Cycle Economy Index</h3>
+        <p>Глобальна дослідницька програма: 2 млн учасниць, 120 країн, 60 мов, 2027–2031.</p>
+        <ul><li>Equal Consideration Standard</li><li>Публічна панель даних</li></ul>
+      </div>
+      <div class="dcard">
+        <div class="icon-circle rose"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4M12 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/></svg></div>
+        <span class="num">02</span>
+        <h3>Аудит жінок 45–64 років</h3>
+        <p>Перше окреме дослідження: рекрутинг, маркетинг та AI-системи у п'яти країнах.</p>
+        <ul><li>UK · DE · PL</li><li>Україна · Іспанія</li></ul>
+      </div>
+      <div class="dcard">
+        <div class="icon-circle gold"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg></div>
+        <span class="num">03</span>
+        <h3>Protection Pathway + Legal Rapid Response</h3>
+        <p>Безпечний вхід у систему допомоги та швидке правове реагування на системні кейси.</p>
+        <ul><li>Пілот в Україні</li><li>Мережа юристів і кризових центрів</li></ul>
+      </div>
+      <div class="dcard">
+        <div class="icon-circle" style="background:var(--plum-700);"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><circle cx="12" cy="17" r="3"/><path d="M9.5 8.7L14.7 15M14.5 8.7L9.5 15"/></svg></div>
+        <span class="num">04</span>
+        <h3>World Women's Assembly</h3>
+        <p>Інфраструктура співпраці жіночих організацій, юристів і дослідників різних країн.</p>
+        <ul><li>Кейс → експертиза → рекомендація</li><li>Партнери зберігають незалежність</li></ul>
+      </div>
+      <div class="dcard">
+        <div class="icon-circle" style="background:var(--blue);"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 5.5L20 8.3l-4 4 1 5.8L12 15.8 7 18.1l1-5.8-4-4 5.6-.8L12 2z"/></svg></div>
+        <span class="num">05</span>
+        <h3>Духовна коаліція + Хартія</h3>
+        <p>Нравственна основа Синархату — моделі зрілого співуправління жіночого й чоловічого начал.</p>
+        <ul><li>Міжнародна духовна коаліція</li><li>Всеобщая хартія гідності</li></ul>
+      </div>
+      <div class="dcard">
+        <div class="icon-circle" style="background:var(--orange);"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 012-2h11.5v15H6a2 2 0 100 4h13"/></svg></div>
+        <span class="num">06</span>
+        <h3>«Вне конкуренції» + FreeWoman</h3>
+        <p>Документальний проєкт і сатирична анімація змінюють культурне значення жіночого віку.</p>
+        <ul><li>Глобальний архів історій</li><li>Сатиричний анімаційний серіал</li></ul>
+      </div>
+      <div class="dcard">
+        <div class="icon-circle" style="background:var(--rose-soft);"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9" r="2.6"/><path d="M3.5 20c0-3.3 2.5-5.5 5.5-5.5s5.5 2.2 5.5 5.5M14.5 20c0-2-1-3.7-2.5-4.7"/></svg></div>
+        <span class="num">07</span>
+        <h3>Womafreesm Reading Order</h3>
+        <p>Міжнародне інтелектуальне товариство жінок навколо читання і живого діалогу.</p>
+        <ul><li>Міські відділення</li><li>Салони та міжнародні події</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2. СТАН ОРГАНІЗАЦІЇ ================= -->
+<section id="status">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">02 · Стан організації</span>
+      <h2>Стан справ: сім напрямків, різна готовність</h2>
+      <p>Портфель Womafreesm складається із семи напрямків різного масштабу та рівня готовності. Частина з них може бути запущена вже найближчим часом, інша вимагає поетапної підготовки.</p>
+    </div>
+
+    <div class="status-grid">
+      <div class="photo-panel" style="background:linear-gradient(135deg,#3B1B36,#6E3763);">
+        <svg class="illustration" viewBox="0 0 500 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <circle cx="90" cy="230" r="140" fill="#54294D" opacity="0.55"/>
+          <circle cx="430" cy="60" r="160" fill="#A8637C" opacity="0.35"/>
+          <g stroke="#E8CE9A" stroke-width="1.4" opacity="0.5">
+            <line x1="0" y1="60" x2="500" y2="60"/><line x1="0" y1="120" x2="500" y2="120"/><line x1="0" y1="180" x2="500" y2="180"/>
+          </g>
+        </svg>
+        <div class="caption">
+          <span class="eyebrow">Готово до запуску</span>
+          <h4>Аудит жінок 45–64 років</h4>
+        </div>
+      </div>
+      <div class="photo-panel" style="background:linear-gradient(135deg,#54294D,#A8637C);">
+        <svg class="illustration" viewBox="0 0 500 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <circle cx="420" cy="240" r="150" fill="#3B1B36" opacity="0.5"/>
+          <circle cx="60" cy="40" r="120" fill="#C7963F" opacity="0.3"/>
+          <g fill="#FBF5EC" opacity="0.5">
+            <circle cx="120" cy="150" r="4"/><circle cx="160" cy="120" r="4"/><circle cx="200" cy="170" r="4"/>
+            <circle cx="250" cy="110" r="4"/><circle cx="300" cy="160" r="4"/><circle cx="340" cy="120" r="4"/>
+          </g>
+        </svg>
+        <div class="caption">
+          <span class="eyebrow">На стадії стратегічного планування</span>
+          <h4>Women's Life-Cycle Economy Index</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="directions" style="grid-template-columns:repeat(2,1fr); margin-top:26px;">
+      <div class="dcard">
+        <h3 style="font-size:17px;">Живий пілот</h3>
+        <p>Protection Pathway — вже приймає перші звернення жінок в Україні, є протокол розмови й карта партнерів.</p>
+      </div>
+      <div class="dcard">
+        <h3 style="font-size:17px;">Інфраструктура на старті</h3>
+        <p>World Women's Assembly — прописаний шлях партнерства (8 кроків), але потребує реальних партнерів у мережі.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3. SWOT ================= -->
+<section id="swot" style="background:var(--cream-2);">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">03 · Оцінка ситуації</span>
+      <h2>SWOT-аналіз</h2>
+      <p>Що дає нам перевагу, де ми вразливі, де можливості і що загрожує плану.</p>
+    </div>
+
+    <div class="swot-grid">
+      <div class="swot-card swot-s">
+        <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Сильні сторони</h3>
+        <ul>
+          <li>Юридична реєстрація вже дає змогу приймати гранти.</li>
+          <li>Одна ідея пронизує все — легко пояснити донору.</li>
+          <li>Аудит 45–64 спирається на реальні події: закон ЄС про AI, перевірки в Британії, стаття в Nature.</li>
+          <li>Готові матеріали для агентств: лендинг, анкета, листи, презентації кількома мовами.</li>
+        </ul>
+      </div>
+      <div class="swot-card swot-w">
+        <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>Слабкі сторони</h3>
+        <ul>
+          <li>Амбіції (2 млн жінок, 120 країн) поки що більші за розмір команди.</li>
+          <li>Забагато напрямків одночасно — жоден не отримує повної уваги.</li>
+          <li>Мова матеріалів то наукова, то духовна — може відлякати сувору аудиторію.</li>
+          <li>Багато ручної роботи: Word-файли, анкети окремо, немає єдиної бази.</li>
+        </ul>
+      </div>
+      <div class="swot-card swot-o">
+        <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v6l4 2M12 21a9 9 0 100-18 9 9 0 000 18z"/></svg>Можливості</h3>
+        <ul>
+          <li>Компанії вже змушені показувати, що в найм і AI немає вікових/гендерних викривлень.</li>
+          <li>Ніша «вік + AI + рекрутинг» практично вільна.</li>
+          <li>Мережа Assembly може дати міжнародний охват без великих витрат.</li>
+          <li>Донорські пакети розбиті на менші суми — гроші можна залучати поступово.</li>
+        </ul>
+      </div>
+      <div class="swot-card swot-t">
+        <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9L2.5 17a2 2 0 001.7 3h15.6a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/></svg>Загрози</h3>
+        <ul>
+          <li>Недосягнута амбіційна ціль шкодить репутації більше, ніж скромна, але виконана.</li>
+          <li>Захист даних у 120 країнах — величезне юридичне навантаження.</li>
+          <li>Витік навіть знеособлених даних одразу зруйнує довіру.</li>
+          <li>Сильні конкуренти за увагу донорів у темі «жінки + дані».</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 4. ПРІОРИТЕТ №1 ================= -->
+<section id="first">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">04 · З чого починаємо</span>
+      <h2>Пріоритет №1: аудит жінок 45–64 років</h2>
+      <p>Починаю не з наймасштабнішого напрямку, а з того, що вже готове до запуску — і покажу перший результат ще цього року.</p>
+    </div>
+
+    <div class="ready-box">
+      <div>
+        <h3>Що вже готове</h3>
+        <p>Все, що потрібно для старту, вже існує — залишається лише організувати запуск.</p>
+        <ul class="check-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Лендинг дослідження (irr.womafreesm.com)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Анкета для агентств готова (Tally)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Презентації й листи — усіма мовами</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Прив'язка до реального регуляторного моменту (EU AI Act)</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Чому я обираю це першим кроком</h3>
+        <p style="margin-top:0;">Це маленьке, конкретне і вже фінансово підйомне дослідження. Перший публічний результат — грудень 2026. Це стане доказом спроможності організації для донорів великого WLCE Index.</p>
+        <p>5 країн першої хвилі: Великобританія, Німеччина, Польща, Україна, Іспанія.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5. ПЛАН ДІЙ 90 ДНІВ ================= -->
+<section id="plan" style="background:var(--cream-2);">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">05 · План дій</span>
+      <h2>Мій план дій на 90 днів</h2>
+      <p>Чотири рішення, які наводжу в перші 90 днів, щоб портфель почав працювати як система, а не як список ідей.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="tstep"><div class="dot">1</div><h4>Розділяю портфель</h4><p>4 окремих «кошики» з власним бюджетом і відповідальним — під одним брендом.</p></div>
+      <div class="tstep"><div class="dot">2</div><h4>Запускаю аудит 45–64</h4><p>Перша вимірна перемога вже в 2026 році — доказ спроможності для донорів.</p></div>
+      <div class="tstep"><div class="dot">3</div><h4>Формую реальні ради</h4><p>2–3 працюючі групи людей замість 10 комітетів на папері.</p></div>
+      <div class="tstep"><div class="dot">4</div><h4>Розділяю мову комунікації</h4><p>Строгий доказовий тон для компаній і юристів окремо від духовного тону коаліції.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6. ОПЕРАЦІЙНІ РІШЕННЯ ================= -->
+<section id="automate">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">06 · Операційні рішення</span>
+      <h2>Що я впроваджую для команди</h2>
+      <p>Чотири конкретні інструменти замість розрізненої ручної роботи.</p>
+    </div>
+
+    <!-- A. Таблиця заявок партнерів -->
+    <div class="auto-block">
+      <div class="auto-block-head">
+        <div class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg></div>
+        <div><span class="label">А · Заявки партнерів і агентств</span><h3>Єдина таблиця заявок з чіткими етапами</h3></div>
+      </div>
+      <p class="block-lede">Замість листування — одна таблиця, де кожен одразу бачить, на якому етапі перебуває заявка і хто за неї відповідає.</p>
+      <div class="table-wrap">
+        <table class="app-table">
+          <thead>
+            <tr><th>№</th><th>Організація</th><th>Країна</th><th>Контактна особа</th><th>Дата подачі</th><th>Етап</th><th>Відповідальний</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Talent Bridge UK</td><td>Великобританія</td><td>O. Newman</td><td>03.02.2026</td><td><span class="pill pill-dd">Due diligence</span></td><td>В. Бондаренко</td></tr>
+            <tr><td>2</td><td>Karriere Plus GmbH</td><td>Німеччина</td><td>J. Krüger</td><td>05.02.2026</td><td><span class="pill pill-review">На перевірці</span></td><td>В. Бондаренко</td></tr>
+            <tr><td>3</td><td>Kadromax</td><td>Польща</td><td>A. Kowalska</td><td>06.02.2026</td><td><span class="pill pill-received">Отримано</span></td><td>К. Тимофєєва</td></tr>
+            <tr><td>4</td><td>Global Recruiters UA</td><td>Україна</td><td>Н. Іваненко</td><td>07.02.2026</td><td><span class="pill pill-approved">Рішення ухвалено</span></td><td>К. Тимофєєва</td></tr>
+            <tr><td>5</td><td>Talento Iberia</td><td>Іспанія</td><td>M. Ruiz</td><td>08.02.2026</td><td><span class="pill pill-integration">Інтеграція</span></td><td>В. Бондаренко</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="stage-legend">
+        <span><i style="background:#6B5A63"></i>Отримано</span>
+        <span><i style="background:var(--blue)"></i>На перевірці</span>
+        <span><i style="background:var(--orange)"></i>Due diligence</span>
+        <span><i style="background:var(--green)"></i>Рішення ухвалено</span>
+        <span><i style="background:var(--rose)"></i>Інтеграція</span>
+      </div>
+    </div>
+
+    <!-- B. Шаблон опитування -->
+    <div class="auto-block">
+      <div class="auto-block-head">
+        <div class="icon-circle rose"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4M12 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/></svg></div>
+        <div><span class="label">Б · Опитування учасниць</span><h3>Шаблон анкети з журналом згод</h3></div>
+      </div>
+      <p class="block-lede">Одна професійна платформа опитувань замість розрізнених форм — з фіксацією згоди на кожному кроці.</p>
+      <div class="consent-card">
+        <div class="consent-head"><span>Опитування Womafreesm</span><span>Мова: Українська ▾</span></div>
+        <div class="consent-body">
+          <div class="consent-id">ID учасниці: WMS-2026-000482 (створюється автоматично)</div>
+
+          <div class="consent-check"><div class="box checked"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div>
+            <span>Я ознайомлена з метою дослідження і даю згоду на участь</span></div>
+
+          <div class="consent-check"><div class="box"></div>
+            <span>Я також даю окрему згоду на участь у чутливому модулі (необов'язково)</span></div>
+
+          <div class="consent-meta">
+            <span>Згоду зафіксовано: 24.07.2026, 14:32</span>
+            <span class="consent-status">Статус: Розпочато</span>
+          </div>
+
+          <button class="consent-btn">Почати опитування →</button>
+
+          <div class="consent-log">
+            <div class="consent-log-title">Журнал згод (приклад записів)</div>
+            <table>
+              <thead><tr><th>ID</th><th>Дата</th><th>Мова</th><th>Основна згода</th><th>Чутливий модуль</th><th>Статус</th></tr></thead>
+              <tbody>
+                <tr><td>…0481</td><td>24.07.2026</td><td>PL</td><td>Так</td><td>Ні</td><td>Завершено</td></tr>
+                <tr><td>…0482</td><td>24.07.2026</td><td>UA</td><td>Так</td><td>—</td><td>Розпочато</td></tr>
+                <tr><td>…0483</td><td>23.07.2026</td><td>ES</td><td>Так</td><td>Так</td><td>Частково</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C. Детальний маршрут звернення -->
+    <div class="auto-block">
+      <div class="auto-block-head">
+        <div class="icon-circle gold"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg></div>
+        <div><span class="label">В · Protection Pathway</span><h3>Маршрут звернення: від контакту до захисту</h3></div>
+      </div>
+      <p class="block-lede">Захищена форма прийому з маршрутизацією — кожен крок описаний окремо, і жодне рішення не приймається без людини.</p>
+
+      <div class="flow-detailed">
+        <div class="flow-step">
+          <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 012-2h3l2 5-2 1a11 11 0 006 6l1-2 5 2v3a2 2 0 01-2 2A16 16 0 013 5z"/></svg></div>
+          <div class="flow-content"><h4>1. Звернення</h4><p>Жінка звертається через телефон, форму на сайті або партнерську організацію. Перший контакт завжди приймає психолог-навігатор.</p></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg></div>
+          <div class="flow-content"><h4>2. Оцінка безпеки</h4><p>Психолог з'ясовує: чи є загроза прямо зараз? Чи є діти в небезпеці? Чи вже задіяні якісь служби? Це контрольні запитання, які завжди задає людина.</p></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4m0 4h.01M10.3 3.9L2.5 17a2 2 0 001.7 3h15.6a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/></svg></div>
+          <div class="flow-content"><h4>3. Визначення рівня терміновості</h4><p>🔴 Терміново — загроза життю, потрібна негайна дія. 🟡 Потребує уваги — ризик є, але не невідкладний. 🟢 Планова підтримка — консультація і супровід.</p></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><circle cx="12" cy="17" r="3"/><path d="M9.5 8.7L14.7 15M14.5 8.7L9.5 15"/></svg></div>
+          <div class="flow-content"><h4>4. Маршрутизація до профільної служби</h4><p>Залежно від типу ситуації: юрист, кризовий центр, шелтер, соціальна служба, міграційна підтримка або психологічна допомога.</p></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div>
+          <div class="flow-content"><h4>5. Обов'язкова людська перевірка</h4><p>Жоден кейс не передається автоматично. Психолог-навігатор або координатор особисто підтверджує напрямок, перш ніж жінку з'єднають зі службою.</p></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h5"/></svg></div>
+          <div class="flow-content"><h4>6. Фіксація кейсу</h4><p>Знеособлені дані потрапляють у базу як частина системної статистики — без імен та ідентифікуючих деталей.</p></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V9m6 10V5m6 14v-7"/></svg></div>
+          <div class="flow-content"><h4>7. Аналіз системних збоїв</h4><p>Повторювані картини стають основою для Legal Rapid Response, аналітичних записок і майбутніх рекомендацій.</p></div>
+        </div>
+      </div>
+
+      <div class="flow-safety">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4m0 4h.01M10.3 3.9L2.5 17a2 2 0 001.7 3h15.6a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/></svg>
+        <p>Принцип, який не змінюється ніколи: маршрутизація може бути підказана системою, але фінальне рішення завжди ухвалює людина.</p>
+      </div>
+    </div>
+
+    <!-- D. Бюджетний дашборд -->
+    <div class="auto-block">
+      <div class="auto-block-head">
+        <div class="icon-circle" style="background:var(--plum-700);"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
+        <div><span class="label">Г · Фінансова прозорість</span><h3>Шаблон бюджетного дашборду</h3></div>
+      </div>
+      <p class="block-lede">Простий дашборд, прив'язаний до бюджетних статей — прозоро для донорів і Ради директорів.</p>
+
+      <div class="budget-dash">
+        <div class="budget-top">
+          <div class="budget-total">
+            <span class="label">Бюджет підготовчого періоду · 2026</span>
+            <div class="amount">$1 250 000</div>
+            <div class="bar-outer"><div class="bar-inner" style="width:33%;"></div></div>
+          </div>
+          <div class="budget-pct">33%<div style="font-size:12px;color:var(--ink-soft);font-family:'Inter',sans-serif;font-weight:600;">витрачено · $412 000</div></div>
+        </div>
+
+        <div class="budget-lines">
+          <div class="budget-line">
+            <div class="row"><span class="name">Управління та команда</span><span class="nums">$95 000 / $220 000</span></div>
+            <div class="bar-outer"><div class="bar-inner" style="width:43%;"></div></div>
+          </div>
+          <div class="budget-line">
+            <div class="row"><span class="name">Методологія досліджень</span><span class="nums">$60 000 / $180 000</span></div>
+            <div class="bar-outer"><div class="bar-inner" style="width:33%;"></div></div>
+          </div>
+          <div class="budget-line">
+            <div class="row"><span class="name">Етика, DPIA, приватність</span><span class="nums">$70 000 / $140 000</span></div>
+            <div class="bar-outer"><div class="bar-inner" style="width:50%;"></div></div>
+          </div>
+          <div class="budget-line">
+            <div class="row"><span class="name">Цифрова платформа</span><span class="nums">$110 000 / $260 000</span></div>
+            <div class="bar-outer"><div class="bar-inner" style="width:42%;"></div></div>
+          </div>
+          <div class="budget-line">
+            <div class="row"><span class="name">Аудит 45–64 (рекрутинг, аналіз)</span><span class="nums">$55 000 / $300 000</span></div>
+            <div class="bar-outer"><div class="bar-inner" style="width:18%;"></div></div>
+          </div>
+          <div class="budget-line">
+            <div class="row"><span class="name">Комунікації та партнерства</span><span class="nums">$22 000 / $150 000</span></div>
+            <div class="bar-outer"><div class="bar-inner" style="width:15%;"></div></div>
+          </div>
+        </div>
+        <div class="budget-note">Цифри — приклад заповнення дашборду для демонстрації формату, не фактичні дані організації.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 7. ЩО ПОТРІБНО ВІД КОМАНДИ Й РАДИ ================= -->
+<section id="ask" style="background:var(--cream-2);">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">07 · Що потрібно від команди й ради</span>
+      <h2>Рішення, ресурси, люди</h2>
+      <p>Щоб план запрацював у перші 90 днів, мені потрібні три речі від ради й команди вже зараз.</p>
+    </div>
+
+    <div class="ask-grid">
+      <div class="ask-card">
+        <div class="icon-circle gold"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 4H8l1-4zM6 7h12l1 14H5L6 7z"/></svg></div>
+        <h3>Рішення</h3>
+        <ul>
+          <li>Затвердити порядок пріоритетів: спочатку Аудит 45–64, потім WLCE Index.</li>
+          <li>Погодити скорочення 10 комітетів до 2–3 реально працюючих груп.</li>
+          <li>Дати мандат на розділення комунікації за аудиторіями.</li>
+          <li>Затвердити бюджет саме на перші 90 днів, а не на весь 5-річний план одразу.</li>
+        </ul>
+      </div>
+      <div class="ask-card">
+        <div class="icon-circle rose"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg></div>
+        <h3>Ресурси</h3>
+        <ul>
+          <li>Бюджет на просту CRM / форму заявок замість листування.</li>
+          <li>Бюджет на платформу опитувань з журналом згод.</li>
+          <li>Кошти на переклад і локалізацію матеріалів.</li>
+          <li>Оплата для операційного координатора (хоча б part-time).</li>
+        </ul>
+      </div>
+      <div class="ask-card">
+        <div class="icon-circle" style="background:var(--plum-800);"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9" r="2.6"/><path d="M3.5 20c0-3.3 2.5-5.5 5.5-5.5s5.5 2.2 5.5 5.5M14.5 20c0-2-1-3.7-2.5-4.7"/></svg></div>
+        <h3>Люди</h3>
+        <ul>
+          <li>Реальні, названі люди на ключові ролі: Ethics &amp; Data lead, Methodology lead.</li>
+          <li>Одна відповідальна особа на кожен із семи напрямків.</li>
+          <li>Координатори країн першої хвилі аудиту (UK, DE, PL, UA, ES).</li>
+          <li>Чіткий власник комунікації для духовної коаліції — окремо від наукового треку.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cta-strip">
+      <p><strong>Без цих трьох речей план залишається документом.</strong>З ними — це вже операційна робота з датами, бюджетом і відповідальними людьми.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= СТРУКТУРА ПРЕЗЕНТАЦІЇ ================= -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Структура презентації</span>
+      <h2>7 слайдів для ради/команди</h2>
+    </div>
+    <div class="slide-grid">
+      <div class="slide-chip"><span>1</span>Сім напрямків</div>
+      <div class="slide-chip"><span>2</span>Стан організації</div>
+      <div class="slide-chip"><span>3</span>SWOT</div>
+      <div class="slide-chip"><span>4</span>Пріоритет №1</div>
+      <div class="slide-chip"><span>5</span>План 90 днів</div>
+      <div class="slide-chip"><span>6</span>Операційні рішення</div>
+      <div class="slide-chip"><span>7</span>Потрібно від ради</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">Womafreesm</div>
+    <div>The World Organization of Women Nations Womafreesm Inc. · стратегічне бачення СЕО</div>
+  </div>
+</footer>
+
+</body>
+</html>
